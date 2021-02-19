@@ -1,0 +1,68 @@
+*
+    margin: 0
+    padding: 0
+
+body
+    font-family: Arial, Helvetica, sans-serif
+    font-style: normal
+    font-weight: normal
+
+a
+    text-decoration: none
+
+header
+    padding: 20px 10px
+    background-color: #dddfdf
+    display: flex
+    align-items: center
+
+.btn-cart
+    padding: 15px 40px
+    background-color: #e99462
+    outline: none
+    border: none
+    border-radius: 5px
+    cursor: pointer
+
+    &:hover
+        background-color: #e97634
+        color: #ffffff
+
+    &:active
+        box-shadow: inset 1px 1px 5px #643114
+
+.products
+    display: flex
+    flex-flow: wrap
+    gap: 10px
+    margin: 10px
+
+    &__item
+        min-width: 200px
+        min-height: 250px
+        border-radius: 5px
+        text-align: center
+        flex: auto
+        box-shadow: 1px 1px 5px #313147
+
+    &__header
+        padding-top: 10px
+
+    &__text
+        padding: 140px 0 10px 0
+        font-weight: 700
+
+    &__by-btn
+        padding: 10px 15px
+        background-color: #a6b3f7
+        outline: none
+        border: none
+        border-radius: 5px
+        cursor: pointer
+
+        &:hover
+            background-color: #96a2da
+            color: #ffffff
+
+        &:active
+            box-shadow: inset 1px 1px 5px #334bc0
