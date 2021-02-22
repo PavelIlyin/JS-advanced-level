@@ -12,21 +12,10 @@ const renderProduct = (title, price) =>
         <button class="products__by-btn">Добавить в корзину</button>
     </div>`;
 
+const renderProducts = list => {
+    list.forEach(item => {
+        document.querySelector('.products').insertAdjacentHTML("beforeend", renderProduct(item.title, item.price))
+    });
+}
 
-// Первичный код с улучшениями:
-
-//const renderProducts = list => {
-//    const productList = list.map( item => renderProduct(item.title, item.price)
-//    );
-
-//    document.querySelector('.products').innerHTML = productList;
-//}
-
-//renderProducts(products);
-
-
-let productEl = document.querySelector('.products');
-
-products.forEach(function(item) {
-    productEl.insertAdjacentHTML("beforeend", renderProduct(item.title, item.price))
-});
+renderProducts(products);
