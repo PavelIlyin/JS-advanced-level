@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Форма проверки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form class="form" action="#" id="myform">
+        <label id="name"> Введите Ваше имя:
+            <input type="text" name="name" placeholder="Иван">
+            <small class="error">Здесь должно быть Ваше имя</small>
+        </label>
+        <label id="phone"> Введите Ваш Телефон:
+            <input type="tel" name="phone" placeholder="+7(000)000-00-00">
+            <small class="error">Здесь должен быть номер телефона в формате
+                +7(000)000-00-00</small>
+        </label>
+        <label id="email"> Введите Ваш e-mail:
+            <input type="email" name="email" placeholder="mymail@mail.ru">
+            <small class="error">Здесь должен быть адрес Вашей э/п в формате mymail@mail.ru</small>
+        </label>
+        <label id="message"> Комментарий:
+            <textarea placeholder="Комментарий" name="message"></textarea>
+            <small class="error">Оставьте любой комментарий</small>
+        </label>
+        <button class="button">Отправить</button>
+        <button class="button_clear" type="reset">Очистить</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>
