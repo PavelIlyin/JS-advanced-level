@@ -1,21 +1,98 @@
-const products = [
-    {id: 1, title: 'Notebook', price: 20000},
-    {id: 2, title: 'Mouse', price: 1500},
-    {id: 3, title: 'Keyboard', price: 5000},
-    {id: 4, title: 'Gamepad', price: 4500},
-];
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-const renderProduct = (title, price) => 
-    `<div class="products__item">
-        <h3 class="products__header">${title}</h3>
-        <p class="products__text">${price}</p>
-        <button class="products__by-btn">Добавить в корзину</button>
-    </div>`;
+const app = new Vue({
+    el: '#app',
+    data: {
+        catalogUrl: '/catalogData.json',
+        imgCatalog: 'https://placehold.it/200x150',
+        imgCart: 'https://placehold.it/50x100',
+        products: [],
+        cartUrl: '/getBasket.json',
+        cart: [],
+        isActive: false,
+        searchItem: '',
+        filtered: [],
 
-const renderProducts = list => {
-    list.forEach(item => {
-        document.querySelector('.products').insertAdjacentHTML("beforeend", renderProduct(item.title, item.price))
-    });
-}
+    },
+    methods: {
+        getJson(url){
+            return fetch(url)
+                .then(result => result.json())
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        addProduct(product) {
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                if (data.result === 1) {
+                    let find = this.cart.find(el => el.id_product === product.id_product);
+                    if (find) {
+                        find.quantity++;
+                    } else {
+                        let prod = Object.assign({quantity: 1}, product);
+                        this.cart.push(prod)
+                    }
+                } else {
+                    alert('Error');
+                }
+            })
+        },
+        remove(item) {
+        this.getJson(`${API}/deleteFromBasket.json`)
+            .then(data => {
+                if (data.result === 1) {
+                    if (item.quantity > 1) {
+                    item.quantity--;
+                    } else {
+                    this.cart.splice(this.cart.indexOf(item), 1)
+                    }
+                }
+            })
+        },
+        filter() {
+            let regexp = new RegExp(this.searchItem, 'i');
+            this.filtered = this.products.filter(el => regexp.test(el.product_name));
+        },
 
-renderProducts(products);
+},
+    beforeCreate() {
+        console.log('beforeCreate');
+    },
+    created() {
+        console.log('created');
+        this.getJson(`${API + this.catalogUrl}`)
+            .then(data => {
+                for(let el of data){
+                    this.products.push(el);
+                    this.filtered.push(el);
+                }
+            });
+        this.getJson(`${API + this.cartUrl}`)
+            .then(data => {
+                for (let el of data.contents) {
+                    this.cart.push(el);
+                }
+            });
+        
+    },
+
+    beforeMount() {
+        console.log('beforeMount');
+    },
+    mounted() {
+        console.log('mounted');
+    },
+    beforeUpdate() {
+        console.log('beforeUpdate');
+    },
+    updated() {
+        console.log('updated');
+    },
+    beforeDestroy() {
+        console.log('beforeDestroy');
+    },
+    destroyed() {
+        console.log('beforeDestroy');
+    }
+});
