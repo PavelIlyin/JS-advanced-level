@@ -1,10 +1,15 @@
 Vue.component('error', {
     data() {
         return {
-            errors: [],
-            err: "Сервер временно недоступен!"
+            err: ''
         }
     },
+    methods: {
+        setError(error) {
+            this.err = error
+        }
+    },
+
     template: `
-        <div class=err v-if="errors.length != 0">{{ err }}</div>`
+        <div class=err v-if="err.length !== 0">{{ err }}</div>`
 });
