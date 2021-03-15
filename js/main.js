@@ -9,7 +9,7 @@ const app = new Vue({
                 .then(result => result.json())
                 .catch(error => {
                     console.log(error);
-                    this.$refs.error.errors.push(error); 
+                    this.$refs.error.setError(error); 
                 })
         },
 
